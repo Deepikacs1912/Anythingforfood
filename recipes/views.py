@@ -10,7 +10,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from django.http import Http404,HttpResponse
 from django.shortcuts import redirect
 from rest_framework import generics
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from rest_framework.decorators import api_view
 
@@ -65,7 +65,7 @@ class RecipeAPIView(APIView):
 #         #     print("bye")
     
 #         # return Response({"error":"Recipe not created successfully"})
-
+@login_required(login_url='login')
 @api_view(['POST','GET'])
 def newrecipe(request):
     
