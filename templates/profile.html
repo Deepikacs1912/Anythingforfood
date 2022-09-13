@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+   <div class="row my-3 p-3">
+    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="cursor:pointer;"/>
+
+</div>
+<div class="form-content">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="small mb-1">Change profile picture</label>
+                    {{ profile_form.image}}
+                          
+                    <label class="small mb-1">Change Phoneno</label>
+                    {{ profile_form.phoneno}}
+                </div>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        </div>
+    </form>
+</div>
+{% else %}
+    <div class="">
+        <h3>Not a register user</h3>
+        <a href="{% url 'register' %}">Signup</a>
+    </div>
+{% endif %}
+{% endblock content %}
